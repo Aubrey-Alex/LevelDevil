@@ -1,5 +1,5 @@
-#ifndef __PROPERTY_IDS_H__
-#define __PROPERTY_IDS_H__
+#ifndef PROPERTY_IDS_H
+#define PROPERTY_IDS_H
 
 /**
  * @brief 定义了用于观察者模式通知的属性ID。
