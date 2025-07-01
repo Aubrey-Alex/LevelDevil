@@ -17,7 +17,7 @@ GameWidget::~GameWidget() noexcept
 
 void GameWidget::draw()
 {
-    // Draw background (sky) - top two-thirds as yellow 
+    // Draw background (sky) - top two-thirds as yellow
     fl_rectf(x(), y(), w(), h() * 2 / 3, FL_YELLOW);
 
     // Draw ground - bottom one-third as black
@@ -30,11 +30,11 @@ void GameWidget::draw()
             // Calculate the top-left drawing coordinates for the entity's bounding box.
             // actor.x and actor.y are relative to the map's origin, which is assumed
             // to be aligned with the GameWidget's origin (x(), y()).
-            int entity_drawing_x = x() + (int)actor.x;
-            int entity_drawing_y = y() + (int)actor.y; 
+            int entity_drawing_x = x() + (int)actor.pos.x;
+            int entity_drawing_y = y() + (int)actor.pos.y; 
 
             switch (actor.type) {
-                case EntityType::Player: // Draw player as a black stick figure
+                case 'P': // Draw player as a black stick figure
                 {
                     fl_color(FL_RED); // Set player color to red
 
@@ -54,19 +54,19 @@ void GameWidget::draw()
                     
                     break;
                 }
-                case EntityType::Wall: {
+                case 'W': {
                     fl_color(FL_DARK_RED); // Walls will be dark red
-                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.width, actor.height);
+                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
                     break;
                 }
-                case EntityType::Door: {
+                case 'D': {
                     fl_color(FL_GREEN); // Doors will be green
-                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.width, actor.height);
+                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
                     break;
                 }
-                case EntityType::Spike: {
+                case 'S': {
                     fl_color(FL_MAGENTA); // Spikes will be magenta
-                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.width, actor.height);
+                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
                     break;
                 }
                 default:
