@@ -62,7 +62,7 @@ void GameWidget::draw()
                 case 'D': {
                     fl_color(FL_BLACK); 
                     fl_rect(entity_drawing_x, entity_drawing_y, 40, 40); 
-                    fl_color(FL_LIGHT_BLUE); 
+                    fl_color(FL_BLUE); 
                     fl_rectf(entity_drawing_x + 1, entity_drawing_y + 1, 38, 38); 
                     break;
                 }
