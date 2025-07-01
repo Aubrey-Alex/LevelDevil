@@ -6,6 +6,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include <memory>
+#include <filesystem>
 class Entity_Model:IModel {
 private:
     std::shared_ptr<GameMap> sp_GameMap;
@@ -53,7 +54,9 @@ public:
     }
     void newLevel(int level) {
         if(level == 1) {
-            loadMapFromJson("C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/code/Model/level1.json");
+            std::filesystem::path currentFile = __FILE__;
+            auto jsonPath = currentFile.parent_path() / "level1.json";
+            loadMapFromJson(jsonPath.string());
         }
     }
     void update(float deltaTime) override {
