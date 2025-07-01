@@ -14,7 +14,7 @@ uintptr_t PropertyTrigger::add_notification(PropertyNotification&& pn)
 	return index + 1;
 }
 
-void PropertyTrigger::fire(uint32_t id)
+void PropertyTrigger::fire(PropertyID id)
 {
 	for (auto& fn : m_vec_nf) {
 		if (fn != nullptr)

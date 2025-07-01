@@ -18,20 +18,20 @@ using StartMoveRightCommand = std::function<void()>;
 using StopMoveCommand = std::function<void()>;
 using JumpCommand = std::function<void()>;
 
-// 游戏控制命令
-using PauseGameCommand = std::function<void()>;
-using ResumeGameCommand = std::function<void()>;
-using RestartLevelCommand = std::function<void()>;
-using QuitGameCommand = std::function<void()>;
+// // 游戏控制命令
+// using PauseGameCommand = std::function<void()>;
+// using ResumeGameCommand = std::function<void()>;
+// using RestartLevelCommand = std::function<void()>;
+// using QuitGameCommand = std::function<void()>;
 
-// UI控制命令
-using ShowMenuCommand = std::function<void()>;
-using HideMenuCommand = std::function<void()>;
-using ToggleDebugInfoCommand = std::function<void()>;
+// // UI控制命令
+// using ShowMenuCommand = std::function<void()>;
+// using HideMenuCommand = std::function<void()>;
+// using ToggleDebugInfoCommand = std::function<void()>;
 
-// 关卡相关命令
-using LoadLevelCommand = std::function<void(int levelId)>;
-using SaveGameCommand = std::function<void()>;
-using LoadGameCommand = std::function<void()>;
+// // 关卡相关命令
+// using LoadLevelCommand = std::function<void(int levelId)>;
+// using SaveGameCommand = std::function<void()>;
+// using LoadGameCommand = std::function<void()>;
 
 #endif

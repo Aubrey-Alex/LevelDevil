@@ -1,0 +1,10 @@
+# CMake generation dependency list for this directory.
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/code/CMakeLists.txt
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/code/Model/level1.json
+C:/Users/20690/vcpkg/installed/x64-windows/share/fltk/FLTK-Targets.cmake
+C:/Users/20690/vcpkg/installed/x64-windows/share/fltk/FLTKConfig.cmake
+C:/Users/20690/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonConfig.cmake
+C:/Users/20690/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonConfigVersion.cmake
+C:/Users/20690/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonTargets.cmake
+C:/cmake-3.31.8-windows-x86_64/share/cmake-3.31/Modules/FindPackageHandleStandardArgs.cmake
+C:/cmake-3.31.8-windows-x86_64/share/cmake-3.31/Modules/FindPackageMessage.cmake

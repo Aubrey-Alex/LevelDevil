@@ -30,7 +30,7 @@ public:
 	}
 
 protected:
-	void PropertyTrigger::fire(uint32_t id);
+	void PropertyTrigger::fire(PropertyID id);
 
 private:
 	std::vector<PropertyNotification> m_vec_nf;

@@ -1,0 +1,4 @@
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/build/code/CMakeFiles/entity_model_test.dir
+C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/build/code/CMakeFiles/ALL_BUILD.dir
