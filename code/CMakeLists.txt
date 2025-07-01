@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
     common/frame.h
     common/game_map.h
     common/property_ids.h
+    common/globals.cpp
     Model/entity_model.h
     Model/object.h
     View/MainWindow.cpp
@@ -28,9 +29,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    fltk::fltk
-    fltk::forms
-    fltk::images
+    fltk
+    fltk_forms
+    fltk_images
     nlohmann_json::nlohmann_json
     precompiled
 )
