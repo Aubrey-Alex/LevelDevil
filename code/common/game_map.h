@@ -1,4 +1,6 @@
- #ifndef __GAME_MAP_H__
+// In D:\work\duanxueqi\SJDXQcourseware\project\code\common\game_map.h
+
+#ifndef __GAME_MAP_H__
 #define __GAME_MAP_H__
 
 #include <vector>
@@ -27,7 +29,7 @@ struct Entity {
     float x = 0, y = 0;           // 位置
     float width = 0, height = 0;  // 大小
     PhysicsProperties physics;     // 物理属性
-    
+
     Entity(EntityType t) : type(t) {}
     virtual ~Entity() = default;
 };
@@ -35,55 +37,39 @@ struct Entity {
 // 游戏地图类
 class GameMap {
 public:
-	GameMap() noexcept
-	{
-	}
+	GameMap() noexcept {}
 	GameMap(const GameMap&) = delete;
-	~GameMap() noexcept
-	{
-	}
+	~GameMap() noexcept {}
 
 	GameMap& operator=(const GameMap&) = delete;
 
-	void clear() noexcept
-	{
+	void clear() noexcept {
 		m_entities.clear();
 	}
 
-	size_t get_size() const noexcept
-	{
+	size_t get_size() const noexcept {
 		return m_entities.size();
 	}
 
-	const Entity& get_at(size_t idx) const noexcept
-	{
-		return *m_entities[idx];
-	}
-	Entity& get_at(size_t idx) noexcept
-	{
-		return *m_entities[idx];
+	const Entity& get_at(size_t index) const {
+		return *m_entities[index];
 	}
 
-	void set_size(size_t size)
-	{
-		m_entities.resize(size);
-	}
+    // 新增：添加实体到地图
+    void add_entity(std::unique_ptr<Entity> entity) {
+        m_entities.push_back(std::move(entity));
+    }
 
-	void append(std::shared_ptr<Entity> v)
-	{
-		m_entities.push_back(v);
-	}
-	void insert(size_t idx, std::shared_ptr<Entity> v)
-	{
-		m_entities.insert(m_entities.begin() + idx, v);
-	}
-	void remove(size_t idx) noexcept
-	{
-		m_entities.erase(m_entities.begin() + idx);
-	}
+    // 新增：获取可变实体指针（用于修改地图中的实体，例如更新玩家位置）
+    Entity* get_entity_mutable_at(size_t index) {
+        if (index < m_entities.size()) {
+            return m_entities[index].get();
+        }
+        return nullptr; // 或者抛出异常
+    }
 
 private:
-    std::vector<std::shared_ptr<Entity>> m_entities;
+	std::vector<std::unique_ptr<Entity>> m_entities;
 };
 
-#endif
+#endif // __GAME_MAP_H__

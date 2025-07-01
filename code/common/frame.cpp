@@ -14,7 +14,8 @@ uintptr_t PropertyTrigger::add_notification(PropertyNotification&& pn)
 	return index + 1;
 }
 
-void PropertyTrigger::fire(uint32_t id)
+// MODIFIED: Change parameter type from uint32_t to PropertyID
+void PropertyTrigger::fire(PropertyID id) // 这里同样去掉 PropertyTrigger::fire 这种写法
 {
 	for (auto& fn : m_vec_nf) {
 		if (fn != nullptr)

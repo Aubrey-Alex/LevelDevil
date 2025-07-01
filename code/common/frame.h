@@ -7,6 +7,7 @@
 #include <cassert>
 #include "property_ids.h"
 
+// 将 PropertyID 视为枚举类型，直接用于 std::function
 using PropertyNotification = std::function<void(PropertyID)>;
 
 // 基础的Observable类，用于实现属性变化通知
@@ -30,7 +31,8 @@ public:
 	}
 
 protected:
-	void PropertyTrigger::fire(uint32_t id);
+    // MODIFIED: Change parameter type from uint32_t to PropertyID
+	void fire(PropertyID id); // 注意：这里不再需要 PropertyTrigger::fire 这种写法
 
 private:
 	std::vector<PropertyNotification> m_vec_nf;
@@ -46,14 +48,6 @@ public:
 class IView {
 public:
 	virtual ~IView() = default;
-	virtual void render() = 0;
-	virtual void bind_view_model(std::shared_ptr<IViewModel> vm) = 0;
-};
-
-class IModel : public PropertyTrigger {
-public:
-	virtual ~IModel() = default;
-	virtual void update(float deltaTime) = 0;
 };
 
 #endif
