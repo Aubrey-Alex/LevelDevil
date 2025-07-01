@@ -19,8 +19,10 @@ enum class PropertyID {
     UIStateChanged,
     ScoreChanged,
     
-    // Debug
-    DebugInfoChanged
+    // 调试相关
+    DebugInfoChanged,       // 调试信息变化
+    
+    MapUpdated // Added for explicit map redraws
 };
 
 #endif
