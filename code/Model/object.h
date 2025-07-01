@@ -25,8 +25,6 @@ class Player : public Entity {
 #define size_w 9
 #define size_h 18
 #define fps 8
-#define rep(i,l,r) for(int i=l;i<=r;i++)
-#define drep(i,r,l) for(int i=r;i>=l;i--)
 private:
     double v_Vertical, v_Horizontal;
     bool isGrounded;
@@ -82,7 +80,7 @@ public:
     int update() {
         int xx = pos.x + v_Horizontal/fps + 0.5, yy = pos.y + v_Vertical/fps + 0.5;
 
-        if(xx<0 || xx>W || yy<0 || yy>H || check_spike(xx, yy)) {//out of field or crash into spike
+        if(xx<0 || xx>Weight || yy<0 || yy>Height || check_spike(xx, yy)) {//out of field or crash into spike
             return -1;//return -1 means die
         }
         else if(check_empty(xx, yy)) {//empty place

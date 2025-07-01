@@ -1,77 +1,61 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-#include "../common/property_ids.h"
-#include "MainWindow.h"
-#include <FL/Fl.H> 
+#ifndef __MAIN_WINDOW_H__
+#define __MAIN_WINDOW_H__
 
-// Constructor needs to initialize m_board
-MainWindow::MainWindow(int w, int h, const char *title) : Fl_Double_Window(w, h, title),
-    m_board(0, 0, w, h) // CORRECTED: Initialize m_board here
+#include "../common/frame.h"
+#include "widgets/GameWidget.h"
+#include <functional> 
+#include <FL/Fl_Double_Window.H> // 必须有这一行，定义基类
+#include <FL/Fl.H> // 用于处理 FLTK 事件，例如键盘事件
+
+class MainWindow : public Fl_Double_Window
 {
-    end(); // Call end() after adding all children
+public:
+    MainWindow(int w, int h, const char *title = nullptr);
+    MainWindow(const MainWindow&) = delete;
+    ~MainWindow() noexcept;
 
-    Fl::add_timeout(0.016, &timeout_cb, this); // Use a smaller timeout for smoother updates (approx 60 FPS)
-    this->take_focus(); // 自动获取焦点，便于捕获键盘事件
-}
+    MainWindow& operator=(const MainWindow&) = delete;
 
-MainWindow::~MainWindow() noexcept
-{
-}
+//commands
+    // 定时更新命令（已存在）
+    void set_next_step_command(std::function<void(float)>&& pn) noexcept
+    {
+        m_next_step_command = std::move(pn);
+    }
+
+    // ADDED: 设置移动和跳跃命令的setter函数
+    void set_start_move_left_command(std::function<void()>&& cmd) noexcept { m_start_move_left_command = std::move(cmd); }
+    void set_start_move_right_command(std::function<void()>&& cmd) noexcept { m_start_move_right_command = std::move(cmd); }
+    void set_stop_move_command(std::function<void()>&& cmd) noexcept { m_stop_move_command = std::move(cmd); }
+    void set_jump_command(std::function<void()>&& cmd) noexcept { m_jump_command = std::move(cmd); }
+
 
 //notification
-PropertyNotification MainWindow::get_notification()
-{
-    // MODIFIED: Change lambda parameter type from uint32_t to PropertyID
-    return [this](PropertyID id)->void // CORRECTED: Lambda now accepts PropertyID
-        {
-            switch (id) {
-            case PropertyID::PlayerPositionChanged: // Use PropertyID directly
-                m_board.redraw();
-                break;
-            default:
-                break;
-            }
-        };
-}
+    PropertyNotification get_notification();
 
+//methods
+    GameWidget& get_board() noexcept
+    {
+        return m_board;
+    }
+
+protected:
 //callbacks
-void MainWindow::timeout_cb(void* pv)
-{
-    MainWindow* pThis = (MainWindow*)pv;
-    // Calculate deltaTime since last frame. For a fixed timeout, it's just the timeout value.
-    float deltaTime = 0.016f; // Corresponds to the Fl::add_timeout value
+    static void timeout_cb(void*);
+    // ADDED: 重写 FLTK 的事件处理函数
+    int handle(int event) override; 
 
-    if (pThis->m_next_step_command != nullptr) {
-        pThis->m_next_step_command(deltaTime); // Pass deltaTime (float)
-    }
-    Fl::repeat_timeout(deltaTime, &timeout_cb, pThis);
-}
+private:
+    GameWidget m_board;
 
-// 实现 FLTK 事件处理函数
-int MainWindow::handle(int event) {
-    printf("event: %d, key: %d\n", event, Fl::event_key()); // 调试输出
-    switch (event) {
-    case FL_KEYDOWN:
-        if (Fl::event_key() == 'a' || Fl::event_key() == 'A') {
-            if (m_start_move_left_command) m_start_move_left_command();
-            return 1;
-        } else if (Fl::event_key() == 'd' || Fl::event_key() == 'D') {
-            if (m_start_move_right_command) m_start_move_right_command();
-            return 1;
-        } else if (Fl::event_key() == 'w' || Fl::event_key() == 'W') {
-            if (m_jump_command) m_jump_command();
-            return 1;
-        }
-        break;
-    case FL_KEYUP:
-        if (Fl::event_key() == 'a' || Fl::event_key() == 'A' || Fl::event_key() == 'd' || Fl::event_key() == 'D') {
-            if (m_stop_move_command) m_stop_move_command();
-            return 1;
-        }
-        break;
-    default:
-        break;
-    }
-    return Fl_Double_Window::handle(event);
-}
+private:
+//commands
+    std::function<void(float)> m_next_step_command;
+    // ADDED: 存储移动和跳跃命令的成员变量
+    std::function<void()> m_start_move_left_command;
+    std::function<void()> m_start_move_right_command;
+    std::function<void()> m_stop_move_command;
+    std::function<void()> m_jump_command;
+};
+
 #endif
