@@ -1,6 +1,6 @@
 #include "GameWidget.h"
-#include <FL/fl_draw.h> 
-#include <FL/Fl.H>       
+#include <FL/fl_draw.h>
+#include <FL/Fl.H>
 
 GameWidget::GameWidget(int x, int y, int w, int h, const char *l) : Fl_Group(x, y, w, h, l)
 {
@@ -26,12 +26,12 @@ void GameWidget::draw()
     if (m_pmap != nullptr) {
         for (size_t i = 0; i < m_pmap->get_size(); i++) {
             const auto& actor(m_pmap->get_at(i));
-            
+
             // Calculate the top-left drawing coordinates for the entity's bounding box.
             // actor.x and actor.y are relative to the map's origin, which is assumed
             // to be aligned with the GameWidget's origin (x(), y()).
             int entity_drawing_x = x() + (int)actor.pos.x;
-            int entity_drawing_y = y() + (int)actor.pos.y; 
+            int entity_drawing_y = y() + (int)actor.pos.y;
 
             switch (actor.type) {
                 case 'P': // Draw player as a black stick figure
@@ -51,30 +51,39 @@ void GameWidget::draw()
                     fl_rectf(entity_drawing_x + 12, entity_drawing_y + 26, 6, 12);
                     // Right Leg (6x12 pixels) - extending from bottom-right of body
                     fl_rectf(entity_drawing_x + 20, entity_drawing_y + 26, 6, 12);
-                    
+
                     break;
                 }
                 case 'W': {
-                    fl_color(FL_DARK_RED); // Walls will be dark red
+                    fl_color(FL_DARK_RED); 
                     fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
                     break;
                 }
                 case 'D': {
-                    fl_color(FL_GREEN); // Doors will be green
-                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
+                    fl_color(FL_BLACK); 
+                    fl_rect(entity_drawing_x, entity_drawing_y, 40, 40); 
+                    fl_color(FL_LIGHT_BLUE); 
+                    fl_rectf(entity_drawing_x + 1, entity_drawing_y + 1, 38, 38); 
                     break;
                 }
                 case 'S': {
-                    fl_color(FL_MAGENTA); // Spikes will be magenta
-                    fl_rectf(entity_drawing_x, entity_drawing_y, actor.w, actor.h);
+                    fl_color(FL_BLACK);
+                    fl_polygon(entity_drawing_x, entity_drawing_y + 13, 
+                               entity_drawing_x + 9, entity_drawing_y,   
+                               entity_drawing_x + 18, entity_drawing_y + 13); 
+                    fl_polygon(entity_drawing_x + 18, entity_drawing_y + 13,
+                               entity_drawing_x + 27, entity_drawing_y,
+                               entity_drawing_x + 36, entity_drawing_y + 13);
+                    fl_polygon(entity_drawing_x + 36, entity_drawing_y + 13,
+                               entity_drawing_x + 45, entity_drawing_y,
+                               entity_drawing_x + 54, entity_drawing_y + 13);
                     break;
                 }
                 default:
-                    // Handle any other entity types or do nothing for them
                     break;
             }
         }
     }
     // Call base class to draw children widgets if any (uncomment if applicable)
-    // BaseClass::draw_children(); 
+    // BaseClass::draw_children();
 }
