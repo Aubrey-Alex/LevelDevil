@@ -57,11 +57,11 @@ public:
 
 	const Entity& get_at(size_t idx) const noexcept
 	{
-		return m_entities[idx];
+		return *m_entities[idx];
 	}
 	Entity& get_at(size_t idx) noexcept
 	{
-		return m_entities[idx];
+		return *m_entities[idx];
 	}
 
 	void set_size(size_t size)
@@ -69,11 +69,11 @@ public:
 		m_entities.resize(size);
 	}
 
-	void append(const Entity& v)
+	void append(std::shared_ptr<Entity> v)
 	{
 		m_entities.push_back(v);
 	}
-	void insert(size_t idx, const Entity& v)
+	void insert(size_t idx, std::shared_ptr<Entity> v)
 	{
 		m_entities.insert(m_entities.begin() + idx, v);
 	}
@@ -83,7 +83,7 @@ public:
 	}
 
 private:
-    std::vector<Entity> m_entities;
+    std::vector<std::shared_ptr<Entity>> m_entities;
 };
 
 #endif
