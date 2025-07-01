@@ -45,6 +45,12 @@ public:
 	virtual void update(float deltaTime) = 0;
 };
 
+class IModel : public PropertyTrigger {
+public:
+	virtual ~IModel() = default;
+	virtual void update(float deltaTime) = 0;
+};
+
 class IView {
 public:
 	virtual ~IView() = default;

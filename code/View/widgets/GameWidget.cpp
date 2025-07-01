@@ -17,7 +17,7 @@ GameWidget::~GameWidget() noexcept
 
 void GameWidget::draw()
 {
-    // Draw background (sky) - top two-thirds as yellow
+    // Draw background (sky) - top two-thirds as yellow 
     fl_rectf(x(), y(), w(), h() * 2 / 3, FL_YELLOW);
 
     // Draw ground - bottom one-third as black

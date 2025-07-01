@@ -5,13 +5,13 @@
 class Door : public Entity {
 public:
     Door(double x, double y): Entity(x, y) {
-        w = 18, h = 27, type = 'D';
+        w = 40, h = 40, type = 'D';
     }
 };
 class Spike : public Entity {
 public:
     Spike(double x, double y): Entity(x, y) {
-        w = 9, h = 3, type = 'S';
+        w = 54, h = 13, type = 'S';
     }
 };
 class Wall : public Entity {
@@ -22,27 +22,30 @@ public:
 };
 
 class Player : public Entity {
-#define size_w 9
-#define size_h 18
-#define fps 8
+#define size_w 26
+#define size_h 38
+#define fps 60
+#define V_Horizontal 40
+#define V_Vertical 60
+#define Gravity 40
 private:
     double v_Vertical, v_Horizontal;
     bool isGrounded;
 public:
     Player(double x, double y) : Entity(x, y) {
         v_Horizontal = v_Vertical = 0, isGrounded = 1;
-        w = 9, h = 18, type = 'P';
+        w = size_w, h = size_h, type = 'P';
     }
     void MoveLeft() {
-        v_Horizontal = -18;//v_left = -18
+        v_Horizontal = -V_Horizontal;
     }
     void MoveRight() {
-        v_Horizontal = 18;//v_right = 18
+        v_Horizontal = V_Horizontal;
     }
     void Jump() {
         if(!isGrounded) return ;//can't jump in the air
         isGrounded = 0;
-        v_Vertical = 18;//v0 = 18
+        v_Vertical = V_Vertical;
     }
     void Stop() {
         v_Horizontal = 0;
@@ -84,7 +87,7 @@ public:
             return -1;//return -1 means die
         }
         else if(check_empty(xx, yy)) {//empty place
-            if(!isGrounded) v_Vertical -= 9/fps;//g = -9
+            if(!isGrounded) v_Vertical -= Gravity/fps;
             del_player_in_map((int)(pos.x+0.5), (int)(pos.y+0.5));
             pos.x += v_Horizontal/fps;
             pos.y += v_Vertical/fps;
@@ -105,7 +108,7 @@ public:
                 v_Horizontal = 0;
             }
             isGrounded = check_down_wall(xx, yy);
-            if(!isGrounded) v_Vertical -= 9/fps;
+            if(!isGrounded) v_Vertical -= Gravity/fps;
             else v_Vertical = 0;
             del_player_in_map((int)(pos.x+0.5), (int)(pos.y+0.5));
             pos.x += v_Horizontal/fps;

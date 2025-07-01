@@ -2,16 +2,8 @@
 #define ENTITY_H
 #define rep(i,l,r) for(int i=l;i<=r;i++)
 #define drep(i,r,l) for(int i=r;i>=l;i--)
-#define Weight 1080
-#define Height 720
-
-
-enum class EntityType {
-    Player,
-    Wall,
-    Door,
-    Spike
-};
+#define Weight 800
+#define Height 400
 
 char mp[Weight][Height];
 struct Position {
