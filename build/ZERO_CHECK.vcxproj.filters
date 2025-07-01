@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\20690\Desktop\Tringmo\files\university\courses\C++_project_manager\LevelDevil\LevelDevil\build\CMakeFiles\f4b8e037763d5712035dc1a60db300db\generate.stamp.rule">
+    <CustomBuild Include="D:\vscode\大二暑\LevelDevil\build\CMakeFiles\4f199d3a0cf7b98b0ea70745affd668e\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{C568E21E-5DC0-3FD2-B3C3-0FC41C230D03}</UniqueIdentifier>
+      <UniqueIdentifier>{BA6CB1FC-D668-3688-8E43-C6BA63A9F654}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

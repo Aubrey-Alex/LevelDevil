@@ -4,7 +4,7 @@
 #include "../common/frame.h"
 #include "../common/commands.h"
 #include <functional>
-class Entity_View_Model: IViewModel {
+class Entity_View_Model: public IViewModel {
 private:
     std::shared_ptr<Entity_Model> sp_Entity_Model;
     bool m_moveLeftActive = false;

@@ -3,7 +3,7 @@
 #include "object.h"
 #include "../common/game_map.h"
 #include "../common/frame.h"
-#include "C:/Users/20690/vcpkg/installed/x64-windows/include/nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #include <fstream>
 #include <memory>
 class Entity_Model:IModel {

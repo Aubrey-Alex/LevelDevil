@@ -1,39 +1,42 @@
-cmake_minimum_required(VERSION 3.15)
-project(EntityModelTest LANGUAGES CXX)
+add_library(precompiled INTERFACE)
+target_precompile_headers(precompiled INTERFACE precomp.h)
 
-# 基础配置
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
-# 显式设置FLTK路径（关键修正）
-set(FLTK_DIR "C:/Users/20690/vcpkg/installed/x64-windows/share/fltk")
-include(${FLTK_DIR}/FLTKConfig.cmake)  # 手动包含配置文件
-
-# 显式设置nlohmann_json路径
-set(nlohmann_json_DIR "C:/Users/20690/vcpkg/installed/x64-windows/share/nlohmann_json")
+find_package(FLTK CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
-cmake_minimum_required(VERSION 3.15)
-project(EntityModelTest LANGUAGES CXX)
 
-# 只编译测试文件
-add_executable(entity_model_test 
+add_executable(${PROJECT_NAME}
+    main.cpp
+    App/App.cpp
+    App/App.h
+    common/commands.h
+    common/Entity.h
+    common/frame.cpp
+    common/frame.h
     common/game_map.h
     common/property_ids.h
-    common/entity.h
-    Model/entity_model_test.cpp
     Model/entity_model.h
     Model/object.h
+    View/MainWindow.cpp
+    View/MainWindow.h
+    View/widgets/GameWidget.cpp
+    View/widgets/GameWidget.h
+    ViewModel/entity_view_model.h
 )
 
-# 包含路径
-target_include_directories(entity_model_test PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/Model
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# 处理JSON文件
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    fltk::fltk
+    fltk::forms
+    fltk::images
+    nlohmann_json::nlohmann_json
+    precompiled
+)
+
 configure_file(
-    Model/level1.json
+    ${CMAKE_CURRENT_SOURCE_DIR}/Model/level1.json
     ${CMAKE_CURRENT_BINARY_DIR}/level1.json
     COPYONLY
 )

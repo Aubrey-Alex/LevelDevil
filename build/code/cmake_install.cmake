@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/code
+# Install script for directory: D:/vscode/大二暑/LevelDevil/code
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Plane")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/LevelDevil")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -35,6 +35,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/20690/Desktop/Tringmo/files/university/courses/C++_project_manager/LevelDevil/LevelDevil/build/code/install_local_manifest.txt"
+  file(WRITE "D:/vscode/大二暑/LevelDevil/build/code/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

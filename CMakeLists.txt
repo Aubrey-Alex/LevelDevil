@@ -1,9 +1,19 @@
 cmake_minimum_required(VERSION 3.16)
+project(LevelDevil LANGUAGES CXX)
 
-set(fltk_DIR "C:/Users/20690/vcpkg/installed/x64-windows/share/fltk")
+# 基础配置
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(Plane)
+# 设置vcpkg工具链
+if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        CACHE STRING "")
+endif()
 
-find_package(fltk CONFIG REQUIRED)
+# 查找依赖包
+find_package(FLTK CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
-add_subdirectory(code code)
+# 添加子目录
+add_subdirectory(code)
